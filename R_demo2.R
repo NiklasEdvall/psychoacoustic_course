@@ -1,6 +1,7 @@
 ##### Libraries
 library(ggplot2)
 library(hrbrthemes)
+library(tidyr)
 
 #####
 #Produce 10 random numbers
@@ -11,6 +12,9 @@ round(runif(10),0)
 
 #calculate means of ten "coin flips"
 mean(round(runif(10),0))
+
+for (i in 1:10)
+{print(i)}
 
 #####
 
@@ -25,6 +29,8 @@ for (i in 1:1000)
 hist(coins, ylim = c(0,350), xlim = c(0,1), breaks = 10, xaxt='n')
 axis(side=1, at=seq(0,1, 0.1), labels=seq(0,1,0.1))
 
+## PP Dice
+
 ##### Same as above but with t-distribution overlay in plot
 
 for (i in 1:1000)
@@ -36,16 +42,16 @@ axis(side=1, at=seq(0,1, 0.1), labels=seq(0,1,0.1))
 par(new = TRUE)
 curve(dt(x, df=10), from=-4, to=4, xaxt='n', yaxt='n', ylab = "")
 
-## PP
+## PP t-distribution
 
 #t-test of coins compared to known mean
-t.test(x, mu = 0.5, alternative = "two.sided")
+t.test(coins, mu = 0.5, alternative = "two.sided")
 
 ##### What if we want to compare different coins?
 
 #sample coins
-green <- sample(x, 250)
-purple <- sample(x, 250)
+green <- sample(coins, 250)
+purple <- sample(coins, 250)
 
 # Build dataset
 data <- data.frame(
@@ -63,4 +69,6 @@ labs(fill="")
 
 #t-test are green or purple coins better at showing heads?
 t.test(green, purple)
+
+#shapiro?
 
