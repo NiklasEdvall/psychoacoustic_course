@@ -40,7 +40,7 @@ geom_hline(yintercept=25, linetype="dashed", color = "black", size=0.5)+
 labs(x = "Frequency (kHz)", y = "Threshold (dB HL)")+
 ggtitle("Audiogram") +
 theme_bw()+
-theme(plot.title = element_text(size = 16))
+  theme(plot.title = element_text(size = 16), axis.text = element_text(size = 12))
 
 
 
@@ -90,7 +90,7 @@ geom_hline(yintercept=25, linetype="dashed", color = "black", size=0.5)+
 labs(x = "Frequency (kHz)", y = "Threshold (dB HL)")+
 ggtitle("Audiogram L") +
 theme_bw()+
-theme(plot.title = element_text(size = 16))
+theme(plot.title = element_text(size = 16), axis.text = element_text(size = 12))
 
 #Create plot for RIGHT EAR
 aud_R <- ggplot(data = aud.dat[aud.dat$ear == "Right",], aes(y = dB, x = freqLabels, group = Group, color = Group, shape = Group))+
@@ -108,10 +108,8 @@ geom_hline(yintercept=25, linetype="dashed", color = "black", size=0.5)+
 labs(x = "Frequency (kHz)", y = "Threshold (dB HL)")+
 ggtitle("Audiogram R") +
 theme_bw()+
-theme(plot.title = element_text(size = 16))
+theme(plot.title = element_text(size = 16), axis.text = element_text(size = 12))
 
 ## Display Left and Right ears for groups ====
 
 ggarrange(aud_L, aud_R, ncol = 2, nrow = 1)
-
-

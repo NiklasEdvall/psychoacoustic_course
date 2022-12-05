@@ -1,6 +1,7 @@
 
 #Libraries
 library(readr)
+library(tidyverse)
 
 #Load data
 example_data <- read_csv("example_data.csv")
@@ -17,10 +18,12 @@ class(dat$ID)
 dat$ID <- factor(dat$ID)
 
 dat$Sex <- factor(dat$Sex)
-levels(dat$Sex) <- c("M", "F")
+levels(dat$Sex) <- c("1", "2")
+dat$Sex <- recode(dat$Sex, "1" = "M", "2" = "F")
 
 dat$Tinnitus <- factor(dat$Tinnitus)
-levels(dat$Tinnitus) <- c("No", "Occasional", "Constant")
+levels(dat$Tinnitus) <- c("0", "1", "2")
+dat$Tinnitus <- recode(dat$Tinnitus, "0" = "No", "1" = "Occasional", "2" = "Constant")
 
 #Check descriptives
 mean(dat$Age)
