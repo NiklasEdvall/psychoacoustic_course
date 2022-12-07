@@ -32,7 +32,7 @@ summary(dat$Age)
 table(dat$Sex)
 table(dat$Sex, dat$Tinnitus)
 
-#Calculate new variables
+#Calculate TMV4 for both methods and ears
 dat$TMV4LHW <- rowMeans(cbind(dat$LHW500, dat$LHW1000, dat$LHW2000, dat$LHW4000))
 dat$TMV4RHW <- rowMeans(cbind(dat$RHW500, dat$RHW1000, dat$RHW2000, dat$RHW4000))
 

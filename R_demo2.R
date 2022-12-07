@@ -13,8 +13,8 @@ round(runif(10),0)
 #calculate means of ten "coin flips"
 mean(round(runif(10),0))
 
-for (i in 1:10)
-{print(i)}
+for (hejsan in 1:10)
+{print(hejsan)}
 
 #####
 
