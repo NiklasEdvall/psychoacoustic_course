@@ -7,6 +7,7 @@ library(readr)
 library(tidyverse)
 library(MASS)
 library(ggplot2)
+library(ggpubr)
 
 #Read in simulated data
 dat <- read_csv("LGF_simdata.csv")
@@ -27,27 +28,32 @@ dat4$loudness_score <- recode(dat4$loudness_score, "low4" = 1, "lowmid4" = 2, "m
 lm_mod5 <- lm(dat5$loudness_score ~ dat5$dB_presentation)
 lm_mod4 <- lm(dat4$loudness_score ~ dat4$dB_presentation)
 
+par(mfrow=c(2,2)) #Specify plots to be on 2-by-2 grid (i.e 4 panels)
+
 #Plot data and linear model fit in standard R
 plot(dat5$dB_presentation, dat5$loudness_score)
 abline(lm_mod5)
 
 plot(dat4$dB_presentation, dat4$loudness_score)
-abline(lm_mod4)
+abline(lm_mod4, col = "red", lwd = 1.5)
+
 
 #A nicer plot(?) option using ggplot-package
-ggplot(dat5, aes(x = dB_presentation, y = loudness_score)) + 
+plot1 <- ggplot(dat5, aes(x = dB_presentation, y = loudness_score)) + 
   geom_point(shape = 1, size = 3) +
   stat_smooth(method = "lm", col = "red", alpha = 0.35)+
   xlab("Level presented (dB HL)")+
   ylab("Loudness category")+
   theme_bw()
 
-ggplot(dat4, aes(x = dB_presentation, y = loudness_score)) + 
+plot2 <- ggplot(dat4, aes(x = dB_presentation, y = loudness_score)) + 
   geom_point(shape = 1, size = 3) +
   stat_smooth(method = "lm", col = "red", alpha = 0.35)+
   xlab("Level presented (dB HL)")+
   ylab("Loudness category")+
   theme_bw()
+
+ggarrange(plot1, plot2, ncol=2, nrow=1)
 
 #Make dummy variables factor
 dat5$loudness_score <- factor(dat5$loudness_score, levels = c(1,2,3,4,5))
